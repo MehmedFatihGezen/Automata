@@ -177,8 +177,11 @@ function statement() {
 }
 
 function withValue() {
-	debugger;
     let i = identifier();
+	if(tok.kind!=ASSIGN)
+	{
+		return i;
+	}
     match(ASSIGN);
     let f = factor();
     return new WithValue(i,f);
@@ -187,10 +190,6 @@ function withValue() {
 function assignment() {
     let v = variable();
     match(ASSIGN);
-	/*if(tok.kind==NUMBER){
-		
-		withValue();
-	}*/
     let e = expression();
     match(SEMICOL);
     return new Assignment(v, e);
@@ -250,4 +249,3 @@ function printItem() {
        return new PrintItem(e1, expression());
     }
 }
-

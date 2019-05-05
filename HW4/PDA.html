@@ -7,11 +7,11 @@
 
 <body>
     <div class="container-fluid">
-        <div class="row bg-success" style="height:300px">
+        <div class="row bg-success p-5" style="min-height:300px">
             <h1 class="text-white">What is PDA?</h1>
             <span class="text-white">A pushdown automaton is a way to implement a context-free grammar in a similar way we design DFA for a regular grammar. A DFA can remember a finite amount of information, but a PDA can remember an infinite amount of information.</span>
         </div>
-        <div class="row" style="height:300px">
+        <div class="row p-5" style="min-height:300px">
             <h1>PDA Examples</h1>
             <span style="white-space:pre-line">
                 {x ∈ {a,b,c}* : x = wcwR for w ∈ {a,b}*}
@@ -24,11 +24,67 @@
                 Observe that this PDA is deterministic in the sense that there are no choices in transitions.
             </span>
         </div>
-    </div>
+
+        <div class="row bg-success justify-content-center text-center text-white" style="min-height:300px;padding: 50px">
+            <div class="col-md-12">
+                <h2>Practice</h2>
+                <h5 class="mb-2">Push-down automaton for unary addition</h5>
+                <h6 class="mb-5">
+                    Rules:
+                    S → aSa | +aEa <br>
+                    E → aEa | =
+                </h6>
+                <input id="input" class="mb-5" type="text" onChange="test()">
+            </div>
+            <div class="col-md-12">
+                <pre class="text-white" id="out"></pre>
+            </div>
+        </div>
 
     <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+    "use strict";
+        function delta(c, p) { // Unary addition
+            if (c == 'a' && p == 'S') return "aSa";
+            if (c == '+' && p == 'S') return "+aEa";
+            if (c == 'a' && p == 'E') return "aEa";
+            if (c == '=' && p == 'E') return "=";
+            return '';  //default -- no transition
+        }
+
+        function accept(w, init = 'S') {
+            //w: input String
+            //init: start symbol
+            //S: stack as Array
+            let txt = "push " + init
+            let i = 0, m = w.length, S = [init]
+            while (i < m && S.length > 0) {
+                let c = w[i], p = S.pop()
+                if (c == p) { //input matches stack
+                    i++; txt += "\nmatch " + c
+                } else { //find a valid transition
+                    let d = delta(c, p)
+                    if (d == '') break
+                    let A = d.split('').reverse()
+                    for (let x of A) S.push(x)
+                    txt += "\npush " + d
+                }
+                txt += " -> "
+                for (let j = S.length - 1; j >= 0; j--)
+                    txt += S[j]
+            }
+            input.selectionStart = i
+            input.selectionEnd = i + 1
+            let a = (i == m && S.length == 0)
+            return txt + '  ' + (a ? "Accept" : "Reject")
+        }
+        function test() {
+            let s = accept(input.value);
+            console.log(s); out.innerHTML = s
+        }
+        </script>
 </body>
 
 </html>

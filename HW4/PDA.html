@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
 </head>
 
@@ -31,60 +32,111 @@
                 <h5 class="mb-2">Push-down automaton for unary addition</h5>
                 <h6 class="mb-5">
                     Rules:
-                    S → aSa | +aEa <br>
+                    S → aSa | +aEa
+                    <br>
                     E → aEa | =
                 </h6>
-                <input id="input" class="mb-5" type="text" onChange="test()">
+                <input id="input" class="mb-5" type="text" onChange="">
+                <button onclick="">Next</button>
             </div>
-            <div class="col-md-12">
+
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
                 <pre class="text-white" id="out"></pre>
+            </div>
+            <div class="col-md-4">
+                <div id="stack" style="width:50%;position:relative; border-top:solid 30px transparent !important; bottom:0px; border:solid green 15px; height:max-content;margin:auto">
+                    <ul id="list" style="width:100%;position:relative;bottom:0px;color:green;padding-left:0px;margin-bottom:0px">
+
+                    </ul>
+                </div>
             </div>
         </div>
 
-    <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-    "use strict";
-        function delta(c, p) { // Unary addition
-            if (c == 'a' && p == 'S') return "aSa";
-            if (c == '+' && p == 'S') return "+aEa";
-            if (c == 'a' && p == 'E') return "aEa";
-            if (c == '=' && p == 'E') return "=";
-            return '';  //default -- no transition
-        }
+        <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script>"use strict";
 
-        function accept(w, init = 'S') {
-            //w: input String
-            //init: start symbol
-            //S: stack as Array
-            let txt = "push " + init
-            let i = 0, m = w.length, S = [init]
-            while (i < m && S.length > 0) {
-                let c = w[i], p = S.pop()
-                if (c == p) { //input matches stack
-                    i++; txt += "\nmatch " + c
-                } else { //find a valid transition
-                    let d = delta(c, p)
-                    if (d == '') break
-                    let A = d.split('').reverse()
-                    for (let x of A) S.push(x)
-                    txt += "\npush " + d
-                }
-                txt += " -> "
-                for (let j = S.length - 1; j >= 0; j--)
-                    txt += S[j]
+            (function($){
+                $(function()
+                {
+
+
+            function delta(c, p) { // Unary addition
+                if (c == 'a' && p == 'S') return "aSa";
+                if (c == '+' && p == 'S') return "+aEa";
+                if (c == 'a' && p == 'E') return "aEa";
+                if (c == '=' && p == 'E') return "=";
+                return '';  //default -- no transition
             }
-            input.selectionStart = i
-            input.selectionEnd = i + 1
-            let a = (i == m && S.length == 0)
-            return txt + '  ' + (a ? "Accept" : "Reject")
-        }
-        function test() {
-            let s = accept(input.value);
-            console.log(s); out.innerHTML = s
-        }
-        </script>
+            let S;
+            let w;
+            let txt;
+            function accept(input, init = 'S') {
+                //w: input String
+                //init: start symbol
+                //S: stack as Array
+                w = input;
+                txt = "push " + init
+                let m = w.length
+                S = [init]
+                /* while (i < m && S.length > 0) {
+                    let c = w[i], p = S.pop()
+                    if (c == p) { //input matches stack
+                        i++; txt += "\nmatch " + c
+                    } else { //find a valid transition
+                        let d = delta(c, p)
+                        if (d == '') break
+                        let A = d.split('').reverse()
+                        for (let x of A) S.push(x);
+                        txt += "\npush " + d
+                    }
+                    txt += " -> "
+                    for (let j = S.length - 1; j >= 0; j--)
+                        txt += S[j]
+                } */
+                /*input.selectionStart = i
+                input.selectionEnd = i + 1
+                let a = (i == w.length && S.length == 0)
+                return txt + '  ' + (a ? "Accept" : "Reject")*/
+            }
+
+            let i = 0;
+            $("button").click(function() {
+                if (i < w.length && S.length > 0) {
+                    let c = w[i], p = S.pop()
+                    $("#list").children().slice(0,1).remove();
+                    if (c == p) { //input matches stack
+                        i++; txt += "\nmatch " + c
+                    } else { //find a valid transition
+                        let d = delta(c, p)
+                        if (d == '') return
+                        let A = d.split('').reverse()
+                        for (let x of A) {
+                            S.push(x);
+                            $("#list").prepend("<li class='list-group-item'>"+x+"</li>");
+                        }
+                        txt += "\npush " + d
+                    }
+                    txt += " -> "
+                    for (let j = S.length - 1; j >= 0; j--)
+                        txt += S[j]
+                    out.innerHTML = txt
+                }
+                else {
+                    let a = (i == w.length && S.length == 0)
+                    out.innerHTML= txt + '  ' + (a ? "Accept" : "Reject")
+                }
+            })
+
+                $("#input").change(function() {
+                let s = accept(input.value);
+                //console.log(s); out.innerHTML = s
+                })
+                });
+            })(jQuery)
+            </script>
 </body>
 
 </html>

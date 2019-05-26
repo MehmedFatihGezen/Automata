@@ -4,13 +4,12 @@ This repository is dedicated to examples of (Formal Languages and Automata Theor
 
 <b>Applications</b>
 
-[CW1-DFA](https://yrgp.github.io/Automata/CW1/Dfa.html)
 
-[CW2-NFA,DFA](https://yrgp.github.io/Automata/CW2/DfaAndNfa.html)
+[CW2-NFA,DFA](https://mehmedfatihgezen.github.io/Automata/CW2/cw2.png)
 
-[CW3-RegExp](https://yrgp.github.io/Automata/CW3/RegExp.html)
+[CW3-RegExp](https://mehmedfatihgezen.github.io/Automata/CW3/cw3.png)
 
-[CW4-CFG For Palindromes](https://yrgp.github.io/Automata/CW4/CFG.html)
+[CW4-CFG For Palindromes](https://mehmedfatihgezen.github.io/Automata/CW4/CW4.png)
 
 [CW5-Recursive-descent Parser](https://yrgp.github.io/Automata/CW5/Expression.html)
 

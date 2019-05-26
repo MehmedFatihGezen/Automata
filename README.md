@@ -21,7 +21,7 @@ This repository is dedicated to examples of (Formal Languages and Automata Theor
 
 <b>Homeworks</b>
 
-[HW1-Regular Expression](https://yrgp.github.io/Automata/HW1/RegExp.html)
+[HW1-Regular Expression](https://mustafakiyga.github.io/AdvancedProgramming/Automata%20Theory/HW1/HW1.html)
 
 [HW2-Math Operations](https://mehmedfatihgezen.github.io/Automata/HW2/Expression.html)
 

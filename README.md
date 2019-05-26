@@ -11,9 +11,9 @@ This repository is dedicated to examples of (Formal Languages and Automata Theor
 
 [CW4-CFG For Palindromes](https://mehmedfatihgezen.github.io/Automata/CW4/CW4.png)
 
-[CW5-Recursive-descent Parser](https://yrgp.github.io/Automata/CW5/Expression.html)
+[CW5-Recursive-descent Parser](https://mehmedfatihgezen.github.io/Automata/CW5/Expression.html)
 
-[CW6-Push-down Automaton](https://yrgp.github.io/Automata/CW6/PDA.html)
+[CW6-Push-down Automaton](https://mehmedfatihgezen.github.io/Automata/CW6/cw6_1.png)
 
 [CW7-MicroJ3 Implementation](https://mehmedfatihgezen.github.io/Automata/CW7/microJ3.html)
 
